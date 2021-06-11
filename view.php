@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 include 'db_connect.php';
 
 	if(!isset($_SESSION['login_id'])){
 		$_SESSION['state'] = 'Sign In';
 	}else{
-		$_SESSION['state'] = 'Sign Out';	
+		$_SESSION['state'] = 'Sign Out';
 	}
 
 
@@ -23,10 +23,10 @@ include 'db_connect.php';
   </head>
 	<style>
 	body{
-	    background:black;
+	    background:white;
 	    color:white;
 	}
-	
+
 		.form-group{
 			width:100% !important;
 		}
@@ -61,7 +61,7 @@ include 'db_connect.php';
 			<div class="topnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
-			         
+
 			         <?php if($_SESSION['typee'] == 'director'){?>
 			             <a href="index.php"><span class="fa fa-home mr-3"></span> Actors</a>
     				    <a href="cart.php"><span class="fa fa-shopping-cart mr-3"></span> Cart</a>
@@ -87,7 +87,7 @@ include 'db_connect.php';
 			</div>
 		</header><br>
 		<div class="wrapper d-flex align-items-stretch">
-			
+
 <main id="clients" class="category-clients">
 	<?php
 		$i = 1;
@@ -120,7 +120,7 @@ include 'db_connect.php';
 		</div>
 		<div class="conta row">
 			<div class="col-md-2">
-				
+
 			</div>
 			<div class="col-md-8" style="border:solid;padding:10px;">
 				<div class="row">
@@ -211,15 +211,15 @@ include 'db_connect.php';
 						<div class="row">
 							<img src="./images/<?php echo $photo; ?>" style="width:200px;height:200px !important;text-align: center !important;margin:auto !important;display:flex !important;">
 						</div>
-						
+
 						<div class="row" style="text-align: center !important;margin-top:10px !important;">
 							<a href="mailto:<?php echo $email; ?>">
 								Send a message by mail
 							</a>
-							 
+
 						</div>
 						<div class="row" style="text-align: center !important;margin-top:10px !important;">
-							
+
 							 <a href="https://wa.me/972<?php echo $mobile; ?>/?text=Hi%20<?php echo $lname; ?>,%20I%20add%20you%20to%20my%20CAST!%20lets%20move%20forward:)">
 							     <img src="../images/whatsapp.png" alt="whatsapp" width="60" height="60"></a>
 						</div>
@@ -227,16 +227,16 @@ include 'db_connect.php';
 				</div>
 				<div class="row">
 					<div class="col-md-8">
-					
-						
+
+
 					</div>
 					<div class="col-md-4">
-						
+
 					</div>
 				</div>
 			</div>
 			<div class="col-md-2">
-				
+
 			</div>
 		</div>
 		<a href="index.php" rel="Back to Actors" class="backTo">
@@ -245,11 +245,11 @@ include 'db_connect.php';
 		</a>
     <!-- Main Image -->
 </main>
-			
+
 		</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-		
+
 		<!-- $( document ).ready(function() { -->
 			<!-- console.log( "ready!" ); -->
 			<!-- document.getElementById("slide1").style.display = "none"; -->
@@ -260,7 +260,7 @@ include 'db_connect.php';
 					  // keyframes
 					  { transform: 'translateX(0%)' },
 					  { transform: 'translateX(-100%)' }
-					  
+
 					], {
 					  // timing options
 					  duration: 1000,
@@ -270,7 +270,7 @@ include 'db_connect.php';
 					  // keyframes
 					  { transform: 'translateX(0%)' },
 					  { transform: 'translateX(-100%)' }
-					  
+
 					], {
 					  // timing options
 					  duration: 1000,
@@ -278,7 +278,7 @@ include 'db_connect.php';
 				 setTimeout(function(){
 						document.getElementById("slide").style.width = "0%";
 					},1000)
-				  	
+
 		};
 	</script>
 
@@ -286,5 +286,5 @@ include 'db_connect.php';
 
 
   </body>
- 
+
 </html>
