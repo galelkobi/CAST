@@ -72,7 +72,7 @@ Class Action {
 		
 		foreach($_FILES['photos']['name'] as $i => $value){
 			$image_name = $_FILES['photos']['tmp_name'][$i];
-			$folder = $_SERVER['DOCUMENT_ROOT']."/actors/images/";
+			$folder = $_SERVER['DOCUMENT_ROOT']."/images/";
 			$image_path = $folder.$_FILES['photos']['name'][$i];
 			move_uploaded_file($image_name,$image_path);
 			$savephoto = $this->db->query("INSERT INTO users_photo SET id_user = '$user_id', photo = '".$_FILES['photos']['name'][$i]."'");
@@ -112,7 +112,7 @@ Class Action {
 		
 		foreach($_FILES['photos']['name'] as $i => $value){
 			$image_name = $_FILES['photos']['tmp_name'][$i];
-			$folder = $_SERVER['DOCUMENT_ROOT']."/actors/images/";
+			$folder = $_SERVER['DOCUMENT_ROOT']."/images/";
 			$image_path = $folder.$_FILES['photos']['name'][$i];
 			move_uploaded_file($image_name,$image_path);
 			$savephoto = $this->db->query("INSERT INTO users_director_photo SET id_user = '$user_id', photo = '".$_FILES['photos']['name'][$i]."'");
