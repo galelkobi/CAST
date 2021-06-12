@@ -18,19 +18,17 @@ include 'db_connect.php';
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Login</title>
+  	<title>CAST|Login</title>
     <meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<style></style>
   </head>
 <style>
         body{
-	        background-image: url(../images/background/asklogin.png);
+	        background-image: url(images/background/asklogin.png);
             height: 100vh;
             background-size: 100% 100%;
             background-position: center;
@@ -63,9 +61,13 @@ include 'db_connect.php';
 	</style>
   <body>
 		<header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
+			        <a  href="homepage.php#download "><span class="fa fa-video mr-3"></span> Video</a>
+			         <a  href="homepage.php#soon "><span class="fa fa-arrow-right mr-3"></span> Soon</a>
+			         <a  href="homepage.php#features "><span class="fa fa-check mr-3"></span> Benefits</a>
+			         <a  href="homepage.php#testimonials "><span class="fa fa-quote-right mr-3"></span> Opinions</a>
 			         <?php if($_SESSION['typee'] == 'director'){?>
 			            <a  href="index.php"><span class="fa fa-home mr-3"></span> Actors</a>
     				    <a href="cart.php"><span class="fa fa-shopping-cart mr-3"></span> Cart</a>
@@ -82,12 +84,19 @@ include 'db_connect.php';
 			  <?php }else{?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
 			        <a href="about_us.php"><span class="fa fa-address-card mr-3"></span> About Us</a>
+			        <a  href="homepage.php#download "><span class="fa fa-video mr-3"></span> Video</a>
+			         <a  href="homepage.php#soon "><span class="fa fa-arrow-right mr-3"></span> Soon</a>
+			         <a  href="homepage.php#features "><span class="fa fa-check mr-3"></span> Benefits</a>
+			         <a  href="homepage.php#testimonials "><span class="fa fa-quote-right mr-3"></span> Opinions</a>
 			        <a href="register.php"><span class="fa fa-registered  mr-3"></span> Register</a>
 			        <a href="webform.php"><span class="fa fa-id-card-alt  mr-3"></span> Contact</a>
 			  <?php }?>
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='active' class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
 		<div class="h-100 wrapper d-flex align-items-stretch">
@@ -95,8 +104,8 @@ include 'db_connect.php';
 			<div class="h-100 reg">
 
 						<div class="row">
-							<div class="col-md-3"></div>
-							<div class="col-md-6">
+							<div class="col-md-4"></div>
+							<div class="col-md-4 loginform">
 								<div class="p-5">
 									<div class="text-center">
 										<h2 class="h4 text-gray-900 mb-4">Welcome Back !</h2>
@@ -119,11 +128,12 @@ include 'db_connect.php';
 									</form>
 									<hr>
 									<div class="text-center">
-										<a class="small" href="register.php">Create an Account !</a>
+										<a style="color:white;" href="register.php">Create an Account !</a>
 									</div>
+									
 								</div>
 							</div>
-							<div class="col-md-3"></div>
+							<div class="col-md-4"></div>
 						</div>
 
 			</div>
@@ -146,13 +156,13 @@ include 'db_connect.php';
 
 				},
 				success:function(resp){
-					if(resp == 1){
+					if(resp == 1){ //this is actor profil-will replace the location to profil.php
 						location.href = 'profile.php';
-					}else if(resp == 2){
+					}else if(resp == 2){//this is director profil-will replace the location to index.php
 						location.href = 'index.php';
 					}
-					else{
-						$('#login-form').prepend('<div class="alert alert-danger">Username or password is incorrect.</div>')
+					else{ 
+						$('#login-form').prepend('<div style="color:white;" class="alert alert-danger">Username or password is incorrect.</div>')
 						$('#login-form button[type="button"]').removeAttr('disabled').html('Login');
 					}
 				}
@@ -165,8 +175,17 @@ include 'db_connect.php';
 		})
 	</script>
 
-<script type='text/javascript' src='./js/js5.js' id='em-js-js'></script>
-
+<script type='text/javascript' src='js/js5.js' id='em-js-js'></script>
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 
   </body>
  

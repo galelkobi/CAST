@@ -10,19 +10,18 @@ include 'db_connect.php';
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Update your profile</title>
+  	<title>CAST|Profile</title>
     <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<style></style>
  
   </head>
 	<style> 
 	    body{
              
-                background-image: url(../images/background/registration.png);
+                background-image: url(images/background/registration.png);
                 height: 100vh;
                 background-size: 100% 100%;
                 background-position: center;
@@ -136,7 +135,7 @@ include 'db_connect.php';
 	</style>
   <body>	
 	<header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
 			         
@@ -162,6 +161,9 @@ include 'db_connect.php';
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
 		<?php
@@ -190,13 +192,14 @@ include 'db_connect.php';
 						
 						<div class="row">
 							<div class="col-md-2"></div>
-							<div class="col-md-4" style="border:solid !important; padding:10px !important;margin:10px !important;">
+							<div class="col-md-4 leftcolumn" style="border:solid; padding:10px; margin:10px;">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4">Qualifications and skills</h4>
 									</div>								
 										<div class="form-group row">
 											<div class="col-sm-6">
+											    <label>Years of experience:</label>
 												<input type="text" class="form-control form-control-user" id="y_experience" name="y_experience" 
 													placeholder="Years experience" value="<?php echo $y_experience;?>">
 											</div>
@@ -206,8 +209,9 @@ include 'db_connect.php';
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>About me:</label>
 												<textarea type="date" class="form-control form-control-user" row="15" id="Other" name="Other"
-													placeholder="About You"><?php echo $Other;?></textarea>
+													placeholder="About me"><?php echo $Other;?></textarea>
 											</div>
 											<div class="col-sm-6">
 
@@ -215,13 +219,14 @@ include 'db_connect.php';
 										</div>
 								</div>
 							</div>
-							<div class="col-md-4" style="border:solid !important; padding:10px !important;margin:10px !important;">
+							<div class="col-md-4 rightcolumn" style="border:solid; padding:10px; margin:10px;">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4">Physical details</h4>
 									</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Gender:</label>
 												<select class="form-control" placeholder="Gender" name="gender" >
 												  <option value="">Gender</option>
 												  <option value="Female" <?php if($gender=='Female'){echo "selected";}?>>Female</option>
@@ -235,6 +240,7 @@ include 'db_connect.php';
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Date of birth:</label>
 												<input type="date" class="form-control form-control-user" id="dob" name="dob"
 													placeholder="Date of Birthday" value="<?php echo $dob;?>">
 											</div>
@@ -246,6 +252,7 @@ include 'db_connect.php';
 										
 										<div class="form-group">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    
 												<label>Upload your photos <small>(format: jpg, jpeg, png)</small></label>
 											<input type="file" name="photos[]" id="pro-image" class="form-control" multiple>
 											</div>
@@ -274,16 +281,17 @@ include 'db_connect.php';
 						
 						<div class="row">
 							<div class="col-md-2"></div>
-							<div class="col-md-4" style="padding:10px !important;margin:10px !important;">
+							<div class="col-md-4" style="padding:10px; margin:10px;">
 								
 							</div>
-							<div class="col-md-4" style="border:solid !important; padding:10px !important;margin:10px !important;">
+							<div class="col-md-4 logininfo" style="border:solid; padding:10px; margin:10px;">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4">Login information</h4>
 									</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>First name:</label>
 												<input type="text" class="form-control form-control-user" id="fname" name="fname" 
 													placeholder="First Name" value="<?php echo $fname;?>">
 											</div>
@@ -293,6 +301,7 @@ include 'db_connect.php';
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Last name:</label>
 												<input type="text" class="form-control form-control-user" id="lname" name="lname"
 													placeholder="Last Name" value="<?php echo $lname;?>">
 											</div>
@@ -300,28 +309,42 @@ include 'db_connect.php';
 												
 											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Address:</label>
 											<input type="text" class="form-control form-control-user" id="address" name="address" 
 													placeholder="address" value="<?php echo $address;?>">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control form-control-user" id="mobile" name="mobile" 
-													placeholder="mobile" value="<?php echo $mobile;?>">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control form-control-user" id="facebook" name="facebook" 
-													placeholder="facebook" value="<?php echo $facebook;?>">
-										</div>
-										<div class="form-group">
-											<input type="email" class="form-control form-control-user" id="email" name="email"
-												placeholder="Email Address" value="<?php echo $email;?>">
+											</div>
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Mobile:</label>
+											<input type="text" class="form-control form-control-user" id="mobile" name="mobile" 
+													placeholder="mobile" value="<?php echo $mobile;?>">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Facebook:</label>
+											<input type="text" class="form-control form-control-user" id="facebook" name="facebook" 
+													placeholder="facebook" value="<?php echo $facebook;?>">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Email:</label>
+											<input type="email" class="form-control form-control-user" id="email" name="email"
+												placeholder="Email Address" value="<?php echo $email;?>">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Password:</label>
 												<input type="password" class="form-control form-control-user" name="password" required
 													id="exampleInputPassword" placeholder="Password">
 											</div>
 											<div class="col-sm-6">
+											    <label>Repeat password:</label>
 												<input type="password" class="form-control form-control-user" name="cpass" required
 													id="exampleRepeatPassword" placeholder="Repeat Password">
 													<small id="pass_match" data-status=''></small>
@@ -459,7 +482,16 @@ include 'db_connect.php';
 		}
 
 	</script>
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
   </body>
  
 </html>

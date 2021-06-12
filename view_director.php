@@ -13,13 +13,12 @@ include 'db_connect.php';
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>profil director</title>
+  	<title>CAST|Director profile</title>
     <meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<style></style>
   </head>
 	<style>
 	body{
@@ -40,14 +39,13 @@ include 'db_connect.php';
 			text-align: center !important;
 		}
 		.backTo{
-			float:left;
 			margin-top: 20px;
-			margin-left: 20px;
 			border:solid;
 			color:white;
 			background-color:red;
-			width:130px;
+			padding: 5px 10px;
 			text-align:center;
+			display: inline-block;
 		}
 		@media only screen and (max-width: 550px) {
 		  /* For mobile phones: */
@@ -58,7 +56,7 @@ include 'db_connect.php';
 	</style>
   <body>
 	    <header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
 			         
@@ -84,6 +82,9 @@ include 'db_connect.php';
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
 		<div class="wrapper d-flex align-items-stretch">
@@ -114,49 +115,51 @@ include 'db_connect.php';
 			<div class="col-md-2">
 				
 			</div>
-			<div class="col-md-8" style="border:solid;padding:10px;">
+			<div class="col-md-8 viewdirector" style="border:solid; padding:10px;">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6 viewleftcolumn">
 								<div class="form-group">
 									<label><strong>Name: </strong><?php echo $fname; ?> <?php echo $lname; ?></label>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 viewleftcolumn">
 								<div class="form-group">
 									<label><strong>Gender: </strong><?php echo $gender; ?></label>
 								</div>
 							</div>
-						</div><br>
+						</div>
+						<br/>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6 viewleftcolumn">
 								<div class="form-group">
 									<label><strong>Date of birth: </strong><?php echo $dob; ?></small</label>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 viewleftcolumn">
 								<div class="form-group">
 									<label><strong>Country of birth: </strong><?php echo $country; ?></label>
 								</div>
 							</div>
-						</div><br>
+						</div>
+						<br/>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6 viewleftcolumn">
 								<div class="form-group">
 									<label><strong>Years Experience </strong><?php echo $years; ?></small</label>
 								</div>
 							</div>
-						</div><br>
-						
-					
+						</div>
+						<br/>					
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-12 viewleftcolumn">
 								<div class="form-group">
 									<label><strong>About me: </strong><?php echo $Other; ?></label>
 								</div>
 							</div>
-						</div><br>
+						</div>
+						<br/>
 					</div>
 					<div class="col-md-4">
 						<div class="row">
@@ -177,24 +180,17 @@ include 'db_connect.php';
 						
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-8">
-					
-						
-					</div>
-					<div class="col-md-4">
-						
-					</div>
-				</div>
 			</div>
 			<div class="col-md-2">
 				
 			</div>
 		</div>
+		<div class="text-center">
 		<a href="int_list.php" rel="Back to interested" class="backTo">
 			<i class="ti-angle-left"></i>
 			<span>Back to Interested List</span>
 		</a>
+		</div>
     <!-- Main Image -->
 </main>
 			
@@ -235,7 +231,16 @@ include 'db_connect.php';
 	</script>
 
 <script type='text/javascript' src='./js/js5.js' id='em-js-js'></script>
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 
   </body>
  

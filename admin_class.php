@@ -58,7 +58,6 @@ Class Action {
 				}
 			}
 		}
-		$id = $_SESSION['login_id'];
 		$check = $this->db->query("SELECT * FROM users where email ='$email' ".(!empty($id) ? " and id != {$id} " : ''))->num_rows;
 		if($check > 0){
 			return 2;
@@ -73,7 +72,7 @@ Class Action {
 		
 		foreach($_FILES['photos']['name'] as $i => $value){
 			$image_name = $_FILES['photos']['tmp_name'][$i];
-			$folder = $_SERVER['DOCUMENT_ROOT']."/images/";
+			$folder = $_SERVER['DOCUMENT_ROOT']."/actors/images/";
 			$image_path = $folder.$_FILES['photos']['name'][$i];
 			move_uploaded_file($image_name,$image_path);
 			$savephoto = $this->db->query("INSERT INTO users_photo SET id_user = '$user_id', photo = '".$_FILES['photos']['name'][$i]."'");
@@ -113,7 +112,7 @@ Class Action {
 		
 		foreach($_FILES['photos']['name'] as $i => $value){
 			$image_name = $_FILES['photos']['tmp_name'][$i];
-			$folder = $_SERVER['DOCUMENT_ROOT']."/images/";
+			$folder = $_SERVER['DOCUMENT_ROOT']."/actors/images/";
 			$image_path = $folder.$_FILES['photos']['name'][$i];
 			move_uploaded_file($image_name,$image_path);
 			$savephoto = $this->db->query("INSERT INTO users_director_photo SET id_user = '$user_id', photo = '".$_FILES['photos']['name'][$i]."'");
@@ -139,6 +138,7 @@ Class Action {
 		}
 		return "march pas";
 	}
+	
 	function update_user(){
 		extract($_POST);
 		$data = "";
@@ -166,8 +166,8 @@ Class Action {
 			$save = $this->db->query("UPDATE users SET $data where id = $id");
 			$user_id = $id;
 		}
-		
-		
+
+
 		foreach($_FILES['photos']['name'] as $i => $value){
 			$image_name = $_FILES['photos']['tmp_name'][$i];
 			$folder = $_SERVER['DOCUMENT_ROOT']."/images/";
@@ -210,8 +210,8 @@ Class Action {
 			$save = $this->db->query("UPDATE users_director SET $data where id = $id");
 			$user_id = $id;
 		}
-		
-		
+
+
 		foreach($_FILES['photos']['name'] as $i => $value){
 			$image_name = $_FILES['photos']['tmp_name'][$i];
 			$folder = $_SERVER['DOCUMENT_ROOT']."/images/";
@@ -236,14 +236,8 @@ Class Action {
 	function delete_photo(){
 		extract($_POST);
 		$delete = $this->db->query("DELETE FROM users_photo where id = ".$id_photo);
-		if($delete){
-			return 1;}
-	}
-	function delete_photo_director(){
-		extract($_POST);
-		$delete = $this->db->query("DELETE FROM users_director_photo where id = ".$id_photo);
-		if($delete){
-			return 1;}
+		if($delete)
+			return 1;
 	}
 	
 	function remove_chart(){
@@ -272,3 +266,4 @@ Class Action {
 	}
 
 }
+?>

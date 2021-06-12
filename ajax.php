@@ -1,5 +1,5 @@
  <?php
- // require 'js/php.js';
+  //require 'js/php.js';
 ob_start();
 $action = $_GET['action'];
 include 'admin_class.php';

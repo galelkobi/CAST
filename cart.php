@@ -15,29 +15,27 @@ include 'db_connect.php';
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Actors list</title>
+  	<title>CAST|Cart</title>
     <meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<style>
-		    body{
-             
-                background-image: url(../images/background/abouts.png);
+		<style> body{
+		        background-image: url(images/background/abouts.png);
                 
                 height: 100vh;
                 background-size: 100% 100%;
                 background-position: center;
-        }
-		</style>
+		    }</style>
   </head>
 
   <body>
 		<header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
+			        
 			         
 			         <?php if($_SESSION['typee'] == 'director'){?>
 			            <a  href="index.php"><span class="fa fa-home mr-3"></span> Actors</a>
@@ -55,16 +53,20 @@ include 'db_connect.php';
 			  <?php }else{?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
 			        <a href="about_us.php"><span class="fa fa-address-card mr-3"></span> About Us</a>
+			        
 			        <a href="register.php"><span class="fa fa-registered  mr-3"></span> Register</a>
 			        <a href="webform.php"><span class="fa fa-id-card-alt  mr-3"></span> Contact</a>
 			  <?php }?>
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
-		<h1 style="color:white">My Cart</h1>
-		<div class=" wrapper d-flex align-items-stretch">
+		<h1 style="color:white; padding: 10px; text-align:center;">My Cart</h1>
+		<div class="wrapper d-flex align-items-stretch">
 <main id="clients" class="category-clients">
     <div class="">
 					
@@ -82,7 +84,7 @@ include 'db_connect.php';
 			 <div class="container row">
 			<?php };?>
 			<?php if($i < 5){ ?>
-				<div class="col-md-3" id="actor-<?php echo $row['id'] ?>">
+				<div class="col-md-3 actordetails" id="actor-<?php echo $row['id'] ?>">
 						<div class="container-<?php echo $row['id'] ?>">
 							<style>
 							.container-<?php echo $row['id'] ?> {
@@ -137,8 +139,8 @@ include 'db_connect.php';
 							  text-align: center;
 							}
 							</style>
-						  <img src="./images/<?php echo $row['photo'] ?>" style="width:200px;height:200px !important;">
-						  <div class="overlay-<?php echo $row['id'] ?>">
+						  <img src="./images/<?php echo $row['photo'] ?>" style="width:200px; height:200px;">
+						  <div class="overlay-<?php echo $row['id'] ?> overlaymobile">
 							
 								
 									<div class="mask">
@@ -192,15 +194,30 @@ include 'db_connect.php';
 						setTimeout(function(){
 							location.replace('cart.php')
 						},750)
+					}else if(resp == 2){
+						$('#msg').html("<div class='alert alert-danger' style='color:white !important;'>Actor already removed from your chart.</div>");
+						setTimeout(function(){
+							$('#msg').html("");
+						},2000)
 					}
+				console.log(resp);
 				}
 			})
 		}
 	</script>
 
-<script type='text/javascript' src='./js/js5.js' id='em-js-js'></script>
+<script type='text/javascript' src='js/js5.js' id='em-js-js'></script>
 
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
   </body>
  
 </html>

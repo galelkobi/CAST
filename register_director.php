@@ -19,19 +19,18 @@ include 'db_connect.php';
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Register as Director</title>
+  	<title>CAST|Register as Director</title>
     <meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<style></style>
- 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
 	<style>
 	    body{
              
-                background-image: url(../images/background/registration.png);
+                background-image: url(images/background/registration.png);
                 height: 100vh;
                 background-size: 100% 100%;
                 background-position: center;
@@ -132,9 +131,13 @@ include 'db_connect.php';
 	</style>
   <body>	
 		<header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
+			        <a  href="homepage.php#download "><span class="fa fa-video mr-3"></span> Video</a>
+			         <a  href="homepage.php#soon "><span class="fa fa-arrow-right mr-3"></span> Soon</a>
+			         <a  href="homepage.php#features "><span class="fa fa-check mr-3"></span> Benefits</a>
+			         <a  href="homepage.php#testimonials "><span class="fa fa-quote-right mr-3"></span> Opinions</a>
 			         
 			         <?php if($_SESSION['typee'] == 'director'){?>
 			            <a href="index.php"><span class="fa fa-home mr-3"></span> Actors</a>
@@ -152,12 +155,19 @@ include 'db_connect.php';
 			  <?php }else{?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
 			        <a href="about_us.php"><span class="fa fa-address-card mr-3"></span> About Us</a>
+			        <a  href="homepage.php#download "><span class="fa fa-video mr-3"></span> Video</a>
+			         <a  href="homepage.php#soon "><span class="fa fa-arrow-right mr-3"></span> Soon</a>
+			         <a  href="homepage.php#features "><span class="fa fa-check mr-3"></span> Benefits</a>
+			         <a  href="homepage.php#testimonials "><span class="fa fa-quote-right mr-3"></span> Opinions</a>
 			        <a class="active" href="register.php"><span class="fa fa-registered  mr-3"></span> Register</a>
 			        <a href="webform.php"><span class="fa fa-id-card-alt  mr-3"></span> Contact</a>
 			  <?php }?>
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
 		<div class="container">
@@ -165,7 +175,7 @@ include 'db_connect.php';
 						<h2>Register as Director</h2>
 						<div class="row">
 							<div class="col-md-2"></div>
-							<div class="col-md-4">
+							<div class="col-md-4 registerleftcolumn">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4" style="color:white">Qualifications and skills</h4>
@@ -173,7 +183,7 @@ include 'db_connect.php';
 										<div class="form-group row">
 											<div class="col-sm-6">
 												<input type="text" class="form-control form-control-user" id="y_experience" name="y_experience" 
-													placeholder="Years of experience">
+													placeholder="Years of experience" required >
 											</div>
 											<div class="col-sm-6">
 												
@@ -182,7 +192,7 @@ include 'db_connect.php';
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<textarea type="date" class="form-control form-control-user" row="15" id="Other" name="Other"
-													placeholder="About me"></textarea>
+													placeholder="About me" required></textarea>
 											</div>
 											<div class="col-sm-6">
 
@@ -190,14 +200,14 @@ include 'db_connect.php';
 										</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 registerrightcolumn">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4 " style="color:white">Details</h4>
 									</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
-												<select class="form-control" placeholder="Gender" name="gender" >
+												<select class="form-control" placeholder="Gender" name="gender" required >
 												  <option value="">Gender</option>
 												  <option value="Female">Female</option>
 												  <option value="Male">Male</option>
@@ -212,17 +222,17 @@ include 'db_connect.php';
 											<div class="col-sm-6 mb-3 mb-sm-0">
 											    <label class="col-sm-6 mb-3 mb-sm-0" style="color:white">Date of Birth</label>
 												<input type="date" class="form-control form-control-user" id="dob" name="dob"
-													placeholder="Date of Birth" >
+													placeholder="Date of Birth" required>
 											</div>
 											<div class="col-sm-6">
 												<input type="text" class="form-control form-control-user" id="country" name="country"
-													placeholder="Country of birth">
+													placeholder="Country of birth" required>
 											</div>
 										</div><br>
 										<div class="form-group">
 											<div class="col-sm-6 mb-3 mb-sm-0" style="color:white">
 												<label>Upload your photos <small>(format: jpg, jpeg, png)</small></label>
-											<input type="file" name="photos[]" id="pro-image" class="form-control" multiple>
+											<input type="file" name="photos[]" id="pro-image" class="form-control" multiple required>
 											</div>
 											<div class="col-sm-6">
 												 <div class="preview-images-zone">
@@ -241,7 +251,7 @@ include 'db_connect.php';
 							<div class="col-md-4">
 								
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 registerlogininfo">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4" style="color:white">Login information</h4>
@@ -249,7 +259,7 @@ include 'db_connect.php';
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="text" class="form-control form-control-user" id="fname" name="fname" 
-													placeholder="First Name">
+													placeholder="First Name" required>
 											</div>
 											<div class="col-sm-6">
 												
@@ -258,36 +268,43 @@ include 'db_connect.php';
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="text" class="form-control form-control-user" id="lname" name="lname"
-													placeholder="Last Name">
+													placeholder="Last Name" required>
 											</div>
 											<div class="col-sm-6">
 												
 											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
 											<input type="text" class="form-control form-control-user" id="address" name="address" 
-													placeholder="address">
+													placeholder="address" required>
+											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
 											<input type="text" class="form-control form-control-user" id="mobile" name="mobile" 
-													placeholder="mobile">
+													placeholder="mobile" required>
+											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
 											<input type="text" class="form-control form-control-user" id="facebook" name="facebook" 
-													placeholder="facebook">
+													placeholder="facebook" required>
 										</div>
-										<div class="form-group">
+										<div class="form-group row">
+											<div class="col-sm-6 mb-3 mb-sm-0">
 											<input type="email" class="form-control form-control-user" id="email" name="email"
-												placeholder="Email Address">
+												placeholder="Email Address" required>
+											</div>
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="password" class="form-control form-control-user" name="password"
-													id="exampleInputPassword" placeholder="Password">
+													id="exampleInputPassword" placeholder="Password" required>
 											</div>
 											<div class="col-sm-6">
 												<input type="password" class="form-control form-control-user" name="cpass"
-													id="exampleRepeatPassword" placeholder="Repeat Password">
+													id="exampleRepeatPassword" placeholder="Repeat Password" required>
 													<small id="pass_match" data-status=''></small>
 											</div>
 										</div><br>
@@ -297,7 +314,7 @@ include 'db_connect.php';
 									
 									<hr>
 									<div class="text-center">
-										<a class="small" href="login.php">Already have an account? Login!</a>
+										<a style="color:white;" href="login.php">Already have an account? Login!</a>
 									</div>
 								</div>
 							</div>
@@ -319,9 +336,9 @@ include 'db_connect.php';
 				$('#pass_match').attr('data-status','')
 			}else{
 				if(cpass == pass){
-					$('#pass_match').attr('data-status','1').html('<i class="text-success">Password Matched.</i>')
+					$('#pass_match').attr('data-status','1').html('<i class="text-success" style="color:white;">Password Matched.</i>')
 				}else{
-					$('#pass_match').attr('data-status','2').html('<i class="text-danger">Password does not match.</i>')
+					$('#pass_match').attr('data-status','2').html('<i class="text-danger" style="color:white;" >Password does not match.</i>')
 				}
 			}
 		})
@@ -412,7 +429,16 @@ include 'db_connect.php';
 		}
 
 	</script>
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
   </body>
  
 </html>

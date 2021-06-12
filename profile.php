@@ -10,19 +10,18 @@ include 'db_connect.php';
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Update your profile</title>
+  	<title>CAST|Profile </title>
     <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<style></style>
  
   </head>
 	<style>
 	    body{
              
-                background-image: url(../images/background/registration.png);
+                background-image: url(images/background/registration.png);
                 height: 100vh;
                 background-size: 100% 100%;
                 background-position: center;
@@ -137,7 +136,7 @@ include 'db_connect.php';
 	</style>
   <body>	
 		<header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
 			         
@@ -163,6 +162,9 @@ include 'db_connect.php';
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
 		<?php
@@ -197,13 +199,14 @@ include 'db_connect.php';
 						
 						<div class="row">
 							<div class="col-md-2"></div>
-							<div class="col-md-4" style="border:solid !important; padding:10px !important;margin:10px !important;">
+							<div class="col-md-4 profileleft" style="border:solid; padding:10px; margin:10px;">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4">Qualifications and skills</h4>
 									</div>								
 										<div class="form-group row">
 											<div class="col-sm-6">
+											    <label>Languages:</label>
 												<input type="text" class="form-control form-control-user" id="languages" name="languages" 
 													placeholder="Languages" value="<?php echo $languages;?>">
 											</div>
@@ -213,23 +216,26 @@ include 'db_connect.php';
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
-												<select class="form-control" placeholder="Dancing/singing" name="hobbies" >
-												  <option value="">Dancing/singing</option>
+											    <label>Hobbies:</label>
+												<select class="form-control" placeholder="Hobbies" name="hobbies" >
+												  <option value="">Hobbies</option>
 												  <option value="Dancing" <?php if($hobbies=='Dancing'){echo "selected";}?>>Dancing</option>
 												  <option value="Singing" <?php if($hobbies=='Singing'){echo "selected";}?>>Singing</option>
 												  <option value="Other" <?php if($hobbies=='Other'){echo "selected";}?>>Other</option>
 												</select>
 											</div>
 											<div class="col-sm-6">
+											    <label>Licence:</label>
 												<select class="form-control" placeholder="Licence" name="Licence">
 												  <option value="">Licence</option>
-												  <option value="Yes" <?php if($Licence=='Yes'){echo "selected";}?>>YES</option>
-												  <option value="No" <?php if($Licence=='No'){echo "selected";}?>>NO</option>
+												  <option value="Yes" <?php if($Licence=='Yes'){echo "selected";}?>>Yes</option>
+												  <option value="No" <?php if($Licence=='No'){echo "selected";}?>>No</option>
 												</select>
 											</div>
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>About me:</label>
 												<textarea type="date" class="form-control form-control-user" row="15" id="Other" name="Other"
 													placeholder="About me"><?php echo $Other;?></textarea>
 											</div>
@@ -239,13 +245,14 @@ include 'db_connect.php';
 										</div>
 								</div>
 							</div>
-							<div class="col-md-4" style="border:solid !important; padding:10px !important;margin:10px !important;">
+							<div class="col-md-4 profileright" style="border:solid; padding:10px; margin:10px;">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4">Physical details</h4>
 									</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Gender:</label>
 												<select class="form-control" placeholder="Gender" name="gender" >
 												  <option value="">Gender</option>
 												  <option value="Female" <?php if($gender=='Female'){echo "selected";}?>>Female</option>
@@ -259,6 +266,7 @@ include 'db_connect.php';
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Eye color:</label>
 												<select class="form-control" placeholder="Eye color" name="eye">
 												  <option value="">Eye color</option>
 												  <option value="black" <?php if($eye=='black'){echo "selected";}?>>black</option>
@@ -269,6 +277,7 @@ include 'db_connect.php';
 												</select>
 											</div>
 											<div class="col-sm-6">
+											    <label>Hair color:</label>
 												<select class="form-control" placeholder="Hair color" name="hair">
 												  <option value="">Hair color</option>
 												   <option value="black" <?php if($hair=='black'){echo "selected";}?>>black</option>
@@ -281,6 +290,7 @@ include 'db_connect.php';
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Skin color:</label>
 												<select class="form-control" placeholder="Skin color" name="skin">
 												  <option value="">Skin color</option>
 												  <option value="black" <?php if($skin=='black'){echo "selected";}?>>black</option>
@@ -289,16 +299,19 @@ include 'db_connect.php';
 												</select>
 											</div>
 											<div class="col-sm-6">
+											    <label>Height:</label>
 												<input type="text" class="form-control form-control-user" id="height" name="height"
 													placeholder="Height(cm)" value="<?php echo $height;?>">
 											</div>
 										</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>Date of birth:</label>
 												<input type="date" class="form-control form-control-user" id="dob" name="dob"
 													placeholder="Date of Birthday" value="<?php echo $dob;?>">
 											</div>
 											<div class="col-sm-6">
+											    <label>Country:</label>
 												<input type="text" class="form-control form-control-user" id="country" name="country"
 													placeholder="Country of birth" value="<?php echo $country;?>">
 											</div>
@@ -337,13 +350,14 @@ include 'db_connect.php';
 							<div class="col-md-4" style="padding:10px !important;margin:10px !important;">
 								
 							</div>
-							<div class="col-md-4" style="border:solid !important; padding:10px !important;margin:10px !important;">
+							<div class="col-md-4 logininfoprofile" style="border:solid; padding:10px; margin:10px;">
 								<div class="p-5">
 									<div class="text-center">
 										<h4 class="h4 text-gray-900 mb-4">Login information</h4>
 									</div>
 										<div class="form-group row">
 											<div class="col-sm-6 mb-3 mb-sm-0">
+											    <label>First name:</label>
 												<input type="text" class="form-control form-control-user" id="fname" name="fname" 
 													placeholder="First Name" value="<?php echo $fname;?>">
 											</div>
@@ -352,6 +366,7 @@ include 'db_connect.php';
 											</div>
 										</div>
 										<div class="form-group row">
+										    <label>Last name:</label>
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="text" class="form-control form-control-user" id="lname" name="lname"
 													placeholder="Last Name" value="<?php echo $lname;?>">
@@ -361,27 +376,33 @@ include 'db_connect.php';
 											</div>
 										</div>
 										<div class="form-group">
+										    <label>Instagram:</label>
 											<input type="text" class="form-control form-control-user" id="address" name="address" 
 													placeholder="instagram" value="<?php echo $address;?>">
 										</div>
 										<div class="form-group">
+										    <label>Mobile:</label>
 											<input type="text" class="form-control form-control-user" id="mobile" name="mobile" 
 													placeholder="mobile" value="<?php echo $mobile;?>">
 										</div>
 										<div class="form-group">
+										    <label>Facebook:</label>
 											<input type="text" class="form-control form-control-user" id="facebook" name="facebook" 
 													placeholder="facebook" value="<?php echo $facebook;?>">
 										</div>
 										<div class="form-group">
+										    <label>Email:</label>
 											<input type="email" class="form-control form-control-user" id="email" name="email"
 												placeholder="Email Address" value="<?php echo $email;?>">
 										</div>
 										<div class="form-group row">
+										    <label>Password:</label>
 											<div class="col-sm-6 mb-3 mb-sm-0">
 												<input type="password" class="form-control form-control-user" name="password" required
 													id="exampleInputPassword" placeholder="Password">
 											</div>
 											<div class="col-sm-6">
+											    <label>Repeat password:</label>
 												<input type="password" class="form-control form-control-user" name="cpass" required
 													id="exampleRepeatPassword" placeholder="Repeat Password">
 													<small id="pass_match" data-status=''></small>
@@ -395,7 +416,6 @@ include 'db_connect.php';
 						<button class="btn btn-primary btn-user btn-block">
 							Update
 						</button>
-						<div id = "msg" style="display:none"></div>
 					</form>
 			
 		</div>
@@ -411,7 +431,7 @@ include 'db_connect.php';
 				$('#pass_match').attr('data-status','')
 			}else{
 				if(cpass == pass){
-					$('#pass_match').attr('data-status','1').html('<i class="text-success">Password Matched.</i>')
+					$('#pass_match').attr('data-status','1').html('<i class="text-success" style=>Password Matched.</i>')
 				}else{
 					$('#pass_match').attr('data-status','2').html('<i class="text-danger">Password does not match.</i>')
 				}
@@ -520,7 +540,16 @@ include 'db_connect.php';
 		}
 
 	</script>
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
   </body>
  
 </html>

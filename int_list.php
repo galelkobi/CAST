@@ -15,15 +15,15 @@ include 'db_connect.php';
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Actors list</title>
+  	<title>CAST|Intersted list</title>
     <meta charset="UTF-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 	<link rel="stylesheet" href="css/style.css"/>
 	<script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
 		<style>
 		    body{
-		        background-image: url(../images/background/abouts.png);
+		        background-image: url(images/background/abouts.png);
                 
                 height: 100vh;
                 background-size: 100% 100%;
@@ -34,9 +34,10 @@ include 'db_connect.php';
 
   <body>
 		<header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
+			        
 			         
 			         <?php if($_SESSION['typee'] == 'director'){?>
 			             <a  href="index.php"><span class="fa fa-home mr-3"></span> Actors</a>
@@ -60,9 +61,12 @@ include 'db_connect.php';
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
-		<h1 style="color:white;">Added Me To Cast:</h1>
+		<h1 style="color:white; padding: 10px;">Added Me To Cast:</h1>
 		<div class="wrapper d-flex align-items-stretch">
 <main id="clients" class="category-clients">
     <div class="">
@@ -81,7 +85,7 @@ include 'db_connect.php';
 			 <div class="container row">
 			<?php };?>
 			<?php if($i < 5){ ?>
-				<div class="col-md-3" id="actor-<?php echo $row['id'] ?>">
+				<div class="col-md-3 intactor" id="actor-<?php echo $row['id'] ?>">
 						<div class="container-<?php echo $row['id'] ?>">
 							<style>
 							.container-<?php echo $row['id'] ?> {
@@ -136,8 +140,8 @@ include 'db_connect.php';
 							  text-align: center;
 							}
 							</style>
-						  <img src="./images/<?php echo $row['photo'] ?>" style="width:200px;height:200px !important;">
-						  <div class="overlay-<?php echo $row['id'] ?>">
+						  <img src="./images/<?php echo $row['photo'] ?>" style="width:200px; height:200px;">
+						  <div class="overlay-<?php echo $row['id'] ?> overlaymobile">
 							
 								
 									<div class="mask">
@@ -174,7 +178,16 @@ include 'db_connect.php';
 
 <script type='text/javascript' src='./js/js5.js' id='em-js-js'></script>
 
-
+<script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 
 
   </body>

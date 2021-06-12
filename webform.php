@@ -43,7 +43,6 @@ session_start();
     <link rel="stylesheet" href="css/style.css"/>
     <script src="https://kit.fontawesome.com/2bca458f4e.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="main.js"></script>
     <style media="screen">
@@ -52,23 +51,27 @@ session_start();
   --font-hover-color:orange;
 }
 body{
-  height:100vh;
   font-family:"Raleway", sans-serif;
-  background-image:url(../images/background/asklogin.png);
+  background-image:url(images/background/asklogin.png);
+  background-size: cover;
 }
 
 .container{
-    margin-top:150px;
-    margin-left:60%;
+    margin-top:50px;
+    margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 50px;
   width:500px;
   box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
   padding:2em;
   background-color:#fff;
 }
-@media only screen and (max-width: 1400px){
+@media only screen and (max-width: 768px){
 .container{
     margin-top:100px;
-    margin-left:50%;
+    margin-left:auto;
+	margin-right:auto;
+	margin-bottom:50px;
   width:500px;
   box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
   padding:2em;
@@ -131,9 +134,6 @@ body{
 textarea{
   resize:none;
 }
-
-
-
 .focused > .form-label{
   opacity:1;
   transform:translateX(0px);
@@ -142,13 +142,19 @@ textarea{
 .form-invalid{
   outline: :1px solid red !important;
 }
-
+@media only screen and (max-width: 420px){
+	.container
+	{
+		width: 100%;
+		margin-top: 0px;
+	}
+}
     </style>
 </head>
 
 <body>
    <header>
-			<div class="topnav">
+			<div class="topnav" id="myTopnav">
 			    <?php if(isset($_SESSION['login_id'])){?>
 			        <a href="homepage.php"><span class="fa fa-home mr-3"></span> Home</a>
 			         
@@ -174,13 +180,17 @@ textarea{
 
 				<?php if($_SESSION['state']=="Sign In"){  echo"<a href='login.php'><span class='fa fa-sign-in mr-3'></span> Sign In</a>";}else{
 					  echo"<a href='logout.php'><span class='fa fa-sign-out mr-3'></span> Sign Out</a>";}?>
+					  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					  </a>
 			</div>
 		</header><br>
 		
   <?php
   if( $message_sent):
      ?>
-  <h3> Thanks we'll be in touch </h3>
+  <h2 style="color:white; text-align:center;"> Thank's we'll be in touch! </h3>
+  
   <?php
   else:
       ?>
@@ -202,10 +212,9 @@ textarea{
             </div>
             <div class="form-group">
                 <label for="message" class="form-label">Message</label>
-                <textarea class="form-control" rows="5" cols="50" id="message" name="message" placeholder="Enter Message..." tabindex="4"></textarea>
+                <textarea class="form-control" rows="15" cols="50" id="message" name="message" placeholder="Enter Message..." tabindex="4"></textarea>
             </div>
             <div>
-                
                 <button type="submit" class="btn">Send Message!</button>
             </div>
         </form>
@@ -218,6 +227,16 @@ textarea{
     endif;
 
      ?>
+	 <script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 </body>
 
 </html>
